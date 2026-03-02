@@ -10,18 +10,7 @@ from google.oauth2 import service_account
 from datetime import datetime
 import os
 
-
-
-credentials = service_account.Credentials.from_service_account_file(
-    "/opt/airflow/repos/airflow-project/scripts/assertiv-edcf4791a41c.json"
-)
-# key_path = r"C:\Users\gabriel.mendes\Assertiv Corretora e Administradora de Seguro\AssertivDesenvolvimento - Documentos\Scripts\assertiv-edcf4791a41c.json"
-
-# Crie credenciais a partir do arquivo de chave JSON
-credentials = service_account.Credentials.from_service_account_file(credentials)
-
-# Crie uma instância do cliente BigQuery com as credenciais fornecidas
-client = bigquery.Client(credentials=credentials, project=credentials.project_id)
+client = bigquery.Client(project="assertiv")
   
 competencia_de = '2018-01-01'
 competencia_ate = '2025-12-01'
