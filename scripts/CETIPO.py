@@ -3,17 +3,53 @@ from google.oauth2 import service_account
 from datetime import datetime
 import os
 
-# Caminho do JSON vindo da variável de ambiente
-key_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
 
-# Verifica se encontrou a variável
-if not key_path or not os.path.exists(key_path):
-    raise FileNotFoundError(f"Arquivo de credenciais não encontrado em: {key_path}")
+# JSON de credenciais convertido para dicionário Python
+service_account_info = {
+    "type": "service_account",
+    "project_id": "assertiv",
+    "private_key_id": "edcf4791a41cdff58d6d7539710a7541ffbb08fe",
+    "private_key": """-----BEGIN PRIVATE KEY-----
+MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCzFjV1Ws2BTQ6C
+eBh6pg1wDATvrFZXO1BH+Smmm7CvdGNVTHhfvHs53/QlRcA/DsZGRaZ3RiUyGEgA
+QdqjOcd/ENHDUl39q63z4io1KccgfA7w7KCRVODhW5AoPnz2hs3HKDxVwcjBnL3J
+wBsavkgtl5n7RRcgE6gVbZ75R7gh2WnbRSwLh1B7TZEtbPcqCQnm8rQ0j/KYTEvY
+VAVxS+liTn1yUZNeeFeF5QXLnYh1ryeRl4+JgdYvAxLOHwu45t5Fzg+KGIBQH0zi
+vl03er8vJ/CCcOkHimfKr4Z8nrNE8rRieuauO00pS1N11495qCYgbq1eygxnGLLl
+6TOsmvv/AgMBAAECggEANPlq0s4LYCYlFp7jztPzwaMsiqEV4TPgaYngsjH3r87j
+20WFjfw5D0OZ+rSJS53ZNMxBk6KiOhFIqxrPy9y5kHKvOfHRb8oq6KuMBLHY/1jz
+Kn00egj7hG4LVHw3hs0VbcYPIubxtaPh2B4FZoHG5AWmPNeRIaHu5HfKwL5gT1J6
+u7On8ivuMvdDOAvOzQUctCAQ4HDa2jUKbTFdbh/b+8Stew2TT46/HYV38/U1TIyq
+4QzDxF2zNDZ68jl0xJIhbpWZ/DYz0weM4PlTp/8fjCUCUhxuwDp6gvMzu4FTqUAL
+gyNVP1nXwIOe/fhpCu7WQAbj532616RJO3R4jYQooQKBgQD2V9Q1xn4PR8sc0vY+
+VlEbI6ZtcagC4b/CzcwyhiDGs2giOyIleMlJwz7xxLM5qav+Qbb/xKhSqbcaAegU
+LLnXzyBW7ZuJoXoE3D/KSx+Sk8xi0gojNjhIMgniNu6qpDgPFLCG6WCBkrwnon5I
+elcWvYilAlMHZrPXyJKfHMED2QKBgQC6G24qxtING3TZuim5KNC1rDss5gJvjcWn
+TgoS5HFwjBTm7qx0CTShePRyMGrwMlQJ8JC1/zK8Mw7DQPH4Bckqen6Ywyat0y4X
+L1Kk+IVwBFVQev0k/lXCIs5HZwfOzpUG0sjCCNkd5+mwBGAGbns4+NFT1pflhzTN
+mH7o1sgPlwKBgHuZIZ5BkyoziVNS/b3VLSiCwJQU/IlFnyMsgpGu/m7zwQG7zawj
+aEscLU68tHfwC52sdxbpItMm1/myjzDgJ/aBs+YpnWp2nHQn1dG304WFpnzGidOU
+9rQydwcLLMBtWLsoVFG8cnFQoBr6yoWu7Fc6jX7NJb+G5iEUP4yZrrYxAoGACIiL
+c6CsLvesUvNrSFcrwrjD+doOEIlin7o/UgBxhySVLMWS2Ls3U5QVOUspDBxyqAYE
+zKOH8wMwURmgPqwdPjphpaWFF4FQYrXDx1ax36IDO254PwL+calg5fs+a2gjgy2V
+EPiQ5AMnPu/ka0cTlVgrWPnE+zxI2oh8gTaf878CgYAh3+RxOdQOagFYD5AnpMlR
+Lbkx/jCJZ6KmU/eixYCTvK3tYP41tPte8wGcL0lZDguCzTQvKSEmx5NbVYWuNWAE
+XnlHpvlbf+6ZFwaZBdd4cZwzrZJ1F6XQi2Xa9XrMwBgvBmJAosv6b/cA0Dps7c/a
+sCWqgqC99rC1X6FfVi9fUQ==
+-----END PRIVATE KEY-----""",
+    "client_email": "conexao-python@assertiv.iam.gserviceaccount.com",
+    "client_id": "116026614789680671862",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/conexao-python%40assertiv.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+}
 
-# Cria credenciais explicitamente
-credentials = service_account.Credentials.from_service_account_file(key_path)
+# Cria credenciais diretamente do dict
+credentials = service_account.Credentials.from_service_account_info(service_account_info)
 
-# Cria o client do BigQuery
+# Client BigQuery
 client = bigquery.Client(credentials=credentials, project=credentials.project_id)
 
 
