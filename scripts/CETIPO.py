@@ -1,21 +1,19 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Aug 26 09:41:51 2024
-
-@author: kelvin.umbelino
-"""
 from google.cloud import bigquery
 from google.oauth2 import service_account
 from datetime import datetime
 import os
 
-# Usa o path dentro do container
-key_path = "/opt/airflow/secrets/gcp.json"
+# Caminho do JSON vindo da variável de ambiente
+key_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+
+# Verifica se encontrou a variável
+if not key_path or not os.path.exists(key_path):
+    raise FileNotFoundError(f"Arquivo de credenciais não encontrado em: {key_path}")
 
 # Cria credenciais explicitamente
 credentials = service_account.Credentials.from_service_account_file(key_path)
 
-# Cria client do BigQuery
+# Cria o client do BigQuery
 client = bigquery.Client(credentials=credentials, project=credentials.project_id)
 
 
