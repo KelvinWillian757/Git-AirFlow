@@ -1,10 +1,8 @@
 from google.cloud import bigquery
 from google.oauth2 import service_account
 from datetime import datetime
-import os
 
-
-# JSON de credenciais convertido para dicionário Python
+# ----- Credenciais direto no script -----
 service_account_info = {
     "type": "service_account",
     "project_id": "assertiv",
@@ -46,13 +44,13 @@ sCWqgqC99rC1X6FfVi9fUQ==
     "universe_domain": "googleapis.com"
 }
 
-# Cria credenciais diretamente do dict
+# ----- Cria credenciais direto do dict -----
 credentials = service_account.Credentials.from_service_account_info(service_account_info)
 
-# Client BigQuery
+# ----- Client BigQuery -----
 client = bigquery.Client(credentials=credentials, project=credentials.project_id)
 
-
+# ----- Período da competência -----
 competencia_de = '2018-01-01'
 competencia_ate = '2025-12-01'
 
