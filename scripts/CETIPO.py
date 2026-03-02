@@ -8,6 +8,7 @@ Created on Mon Aug 26 09:41:51 2024
 from google.cloud import bigquery
 from google.oauth2 import service_account
 from datetime import datetime
+import os
 
 # Caminho para o seu arquivo de chave JSON
 key_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'key', 'assertiv-edcf4791a41c.json')
