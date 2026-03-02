@@ -4,21 +4,20 @@ Created on Mon Aug 26 09:41:51 2024
 
 @author: kelvin.umbelino
 """
-
 from google.cloud import bigquery
 from google.oauth2 import service_account
 from datetime import datetime
 import os
 
-
-# Busca o path do JSON da variável de ambiente
-key_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+# Usa o path dentro do container
+key_path = "/opt/airflow/secrets/gcp.json"
 
 # Cria credenciais explicitamente
 credentials = service_account.Credentials.from_service_account_file(key_path)
 
-# Cria o client do BigQuery usando as credenciais
+# Cria client do BigQuery
 client = bigquery.Client(credentials=credentials, project=credentials.project_id)
+
 
 competencia_de = '2018-01-01'
 competencia_ate = '2025-12-01'
