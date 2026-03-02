@@ -11,7 +11,11 @@ from datetime import datetime
 import os
 
 # Caminho para o seu arquivo de chave JSON
-key_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'key', 'assertiv-edcf4791a41c.json')
+key_path = os.path.join(
+    os.path.dirname(os.path.dirname(__file__)),
+    'key',
+    'assertiv-edcf4791a41c.json'
+)
 # key_path = r"C:\Users\gabriel.mendes\Assertiv Corretora e Administradora de Seguro\AssertivDesenvolvimento - Documentos\Scripts\assertiv-edcf4791a41c.json"
 
 # Crie credenciais a partir do arquivo de chave JSON
