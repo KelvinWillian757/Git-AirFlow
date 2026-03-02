@@ -10,8 +10,16 @@ from google.oauth2 import service_account
 from datetime import datetime
 import os
 
-client = bigquery.Client(project="assertiv")
-  
+
+# Busca o path do JSON da variável de ambiente
+key_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+
+# Cria credenciais explicitamente
+credentials = service_account.Credentials.from_service_account_file(key_path)
+
+# Cria o client do BigQuery usando as credenciais
+client = bigquery.Client(credentials=credentials, project=credentials.project_id)
+
 competencia_de = '2018-01-01'
 competencia_ate = '2025-12-01'
 
