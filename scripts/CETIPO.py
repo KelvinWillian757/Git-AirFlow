@@ -2,9 +2,9 @@ from google.cloud import bigquery
 from google.oauth2 import service_account
 from datetime import datetime
 import json
+import os
 # ----- Credenciais direto no script -----
-with open('/opt/airflow/credentials/gcp.json', 'r') as f:
-    service_account_info = json.load(f)
+service_account_info = json.loads(os.environ['GCP_KEY'])
 # ----- Cria credenciais direto do dict -----
 credentials = service_account.Credentials.from_service_account_info(service_account_info)
 # ----- Client BigQuery -----
